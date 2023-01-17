@@ -13,8 +13,8 @@ logBookTitles(getBookTitlesByCategory(Category.JavaScript));
 console.log(getBookAuthorByIndex(2));
 console.log(calcTotalPages());
 
-function getAllBooks(): Book[] {
-    return [
+function getAllBooks(): readonly Book[] {
+    const books = <const>[
         {
             id: 1,
             title: 'Refactoring JavaScript',
@@ -44,9 +44,10 @@ function getAllBooks(): Book[] {
             category: Category.JavaScript
         }
     ];
+    return books;
 }
 
-function logFirstAvailable(books: Book[]) {
+function logFirstAvailable(books: readonly Book[]) {
     console.log(`There is ${books.length} available`);
     const availableBooks = books.filter(({ available }) => available);
     if (availableBooks.length > 0) {
@@ -77,7 +78,7 @@ function getBookAuthorByIndex(id: number): [title: string, author: string] {
 }
 
 function calcTotalPages(): bigint {
-    const data = [
+    const data = <const>[
         { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
         { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
         { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 },
