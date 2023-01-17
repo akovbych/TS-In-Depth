@@ -48,16 +48,16 @@ function getAllBooks(): Book[] {
 
 function logFirstAvailable(books: Book[]) {
     console.log(`There is ${books.length} available`);
-
-    if (books.length > 0) {
-        console.log(`Name of first book is ${books[0].title}`);
+    const availableBooks = books.filter(({ available }) => available);
+    if (availableBooks.length > 0) {
+        console.log(`Name of first book is ${availableBooks[0].title}`);
     }
 }
 
-function getBookTitlesByCategory(category: Category): Book[] {
+function getBookTitlesByCategory(categoryFilter: Category): string[] {
     const books = getAllBooks();
 
-    return books.filter(book => book.category === category);
+    return books.filter(({ category }) => category === categoryFilter).map(({ title }) => title);
 }
 
 function logBookTitles(items: any[]) {
@@ -80,11 +80,11 @@ function calcTotalPages(): bigint {
     const data = [
         { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
         { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
-        { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
+        { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 },
     ];
     let pages: bigint = 0n;
 
-    data.forEach(item => pages += BigInt(item.books * item.avgPagesPerBook));
+    data.forEach(item => pages += BigInt(BigInt(item.books) * BigInt(item.avgPagesPerBook)));
 
     return pages;
 }
