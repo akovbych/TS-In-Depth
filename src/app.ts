@@ -1,4 +1,5 @@
 import './Tasks/02/task0201';
+import './Tasks/03/task';
 
 showHello('greeting', 'TypeScript');
 

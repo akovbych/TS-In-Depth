@@ -1,3 +1,5 @@
+/* eslint-disable no-redeclare */
+
 type Book = {
     id: number;
     title: string;
@@ -9,7 +11,9 @@ type Book = {
 enum Category { JavaScript, CSS, HTML, TypeScript, Angular }
 
 logFirstAvailable(getAllBooks());
+logFirstAvailable();
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
+logBookTitles(getBookTitlesByCategory());
 console.log(getBookAuthorByIndex(2));
 console.log(calcTotalPages());
 
@@ -47,7 +51,7 @@ function getAllBooks(): readonly Book[] {
     return books;
 }
 
-function logFirstAvailable(books: readonly Book[]) {
+function logFirstAvailable(books: readonly Book[] = getAllBooks()) {
     console.log(`There is ${books.length} available`);
     const availableBooks = books.filter(({ available }) => available);
     if (availableBooks.length > 0) {
@@ -55,7 +59,7 @@ function logFirstAvailable(books: readonly Book[]) {
     }
 }
 
-function getBookTitlesByCategory(categoryFilter: Category): string[] {
+function getBookTitlesByCategory(categoryFilter: Category = Category.JavaScript): string[] {
     const books = getAllBooks();
 
     return books.filter(({ category }) => category === categoryFilter).map(({ title }) => title);
@@ -89,3 +93,50 @@ function calcTotalPages(): bigint {
 
     return pages;
 }
+
+
+function getBookByID(neededID: number): Book {
+    const books = getAllBooks();
+
+    return books.find(({ id }) => id === neededID);
+}
+console.log(getBookByID(1));
+
+function checkoutBooks(customer: string, ...bookIDs: number[]): string[] {
+    console.log(`Customer: ${customer}`);
+
+    return bookIDs
+        .map(id => getBookByID(id))
+        .filter(({ available }) => available)
+        .map(({ title }) => title);
+}
+
+const myBooks = checkoutBooks('Ann', 1, 2, 4);
+console.log(myBooks);
+
+function getTitles(author: string): string[];
+function getTitles(available: boolean): string[];
+function getTitles(id: number, available: boolean): string[];
+function getTitles(...args: [string | boolean] | [number, boolean]): string[] {
+    const books = getAllBooks();
+
+    if (args.length === 1) {
+        const [arg] = args;
+
+        if (typeof arg === 'string') {
+            return books.filter(({ author }) => author === arg).map(({ title }) => title);
+        } else if (typeof arg === 'boolean') {
+            return books.filter(({ available }) => available === arg).map(({ title }) => title);
+        }
+
+    } else if (args.length === 2) {
+        const [id, available] = args;
+
+        if (typeof id === 'number' && typeof available === 'boolean') {
+            return books.filter((book) => book.id === id && book.available === available).map(({ title }) => title);
+        }
+    }
+}
+
+
+console.log(getTitles(true));
