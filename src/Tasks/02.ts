@@ -144,3 +144,15 @@ function getTitles(...args: [string | boolean] | [number, boolean]): string[] {
 
 
 console.log(getTitles(true));
+
+const myBook: Book = {
+    id: 5,
+    title: 'Colors',
+    author: 'author',
+    available: true,
+    category: Category.CSS,
+    pages: 200,
+    markDamaged(reason: string): void {
+        console.log(`Damaged: ${reason}`);
+    }
+};

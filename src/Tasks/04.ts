@@ -1,14 +1,4 @@
-const myBook: Book = {
-    id: 5,
-    title: 'Colors',
-    author: 'author',
-    available: true,
-    category: Category.CSS,
-    pages: 200,
-    markDamaged(reason: string): void {
-        console.log(`Damaged: ${reason}`);
-    }
-};
+
 
 interface DamageLogger {
     (reason: string): void;
@@ -46,3 +36,21 @@ const favoriteLibrarian: Librarian = {
     department: 'Classical',
     assistCustomer: null,
 };
+
+const offer: any = { book: { title: 'Essential TypeScript' } };
+
+console.log(offer.magazine);
+console.log(offer.magazine?.getTitle());
+console.log(offer.book.getTitle?.());
+console.log(offer.book.authors?.[0]);
+
+type BookProperties = keyof Book;
+
+function getProperty(book: Book, prop: BookProperties): any {
+    const value = book[prop];
+    return typeof value === 'function' ? value.name : value;
+}
+
+// console.log(getProperty(myBook, 'title'));
+// console.log(getProperty(myBook, 'markDamaged'));
+// console.log(getProperty(myBook, 'isbn'));

@@ -1,5 +1,7 @@
-import './Tasks/02/task0201';
-import './Tasks/03/task';
+import './Tasks/02';
+import './Tasks/03';
+import './Tasks/04';
+import './Tasks/05';
 
 showHello('greeting', 'TypeScript');
 

@@ -26,11 +26,11 @@ function assertStringValue(value: any): asserts value is string {
     }
 }
 
-function bookTitleTransform(title: any): string {
-    assertStringValue(title);
+// function bookTitleTransform(title: any): string {
+//     assertStringValue(title);
 
-    return [...title].reverse().join('');
-}
+//     return [...title].reverse().join('');
+// }
 
-console.log(bookTitleTransform('TypeScript'));
-console.log(bookTitleTransform(1));
+// console.log(bookTitleTransform('TypeScript'));
+// console.log(bookTitleTransform(1));
