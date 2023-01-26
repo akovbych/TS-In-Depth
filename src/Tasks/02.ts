@@ -99,7 +99,7 @@ function calcTotalPages(): bigint {
 }
 
 
-function getBookByID(neededID: number): Book {
+function getBookByID(neededID: number): BookOrUndefined {
     const books = getAllBooks();
 
     return books.find(({ id }) => id === neededID);

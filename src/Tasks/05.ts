@@ -59,3 +59,45 @@ class Encyclopedia extends ReferenceItem {
 const refBook = new Encyclopedia('title', 2023, 1, 1);
 refBook.printItem();
 refBook.printCitation();
+
+class UniversityLibrarian implements Librarian {
+    name: string;
+    email: string;
+    department: string;
+
+    assistCustomer(custName: string, bookTitle: string): void {
+        console.log(`${this.name} is assisting ${custName} with book ${bookTitle}`);
+    }
+}
+
+
+const favoriteLibrarian05: Librarian = new UniversityLibrarian();
+favoriteLibrarian05.name = 'Anton';
+favoriteLibrarian05.assistCustomer('Boris', 'Learn TypeScript');
+
+type PersonBook = Person & Book;
+
+const personBook: PersonBook = {
+    author: 'Anna',
+    available: false,
+    category: Category.Angular,
+    email: 'anna@example.com',
+    id: 1,
+    name: 'Anna',
+    title: 'title',
+};
+
+type BookOrUndefined = Book | undefined;
+
+interface TOptions {
+    duration?: number;
+    speed?: number;
+}
+
+function setDefaultConfig(options: TOptions): TOptions {
+    options.duration ??= 200;
+    options.speed ??= 90;
+    return options;
+}
+const config: TOptions = {};
+console.log(setDefaultConfig(config));
