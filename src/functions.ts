@@ -159,3 +159,12 @@ export function setDefaultConfig(options: TOptions): TOptions {
     options.speed ??= 90;
     return options;
 }
+
+export function purge<T>(inventory: T[]): T[] {
+    return inventory.slice(2);
+}
+
+export function getObjectProperty<TObject extends object, TKey extends keyof TObject>(obj: TObject, prop: TKey): TObject[TKey] | string {
+    const value = obj[prop];
+    return typeof value === 'function' ? value.name : value;
+}
