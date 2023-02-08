@@ -5,8 +5,9 @@
 import { Shelf } from './classes';
 import { Library } from './classes/library';
 import { Category } from './enums';
-import { getObjectProperty, purge } from './functions';
+import { createCustomer, getObjectProperty, purge } from './functions';
 import { Book, Magazine } from './interfaces';
+import { BookRequiredFields, CreateCustomerFunctionType, UpdatedBook } from './types';
 
 showHello('greeting', 'TypeScript');
 
@@ -68,3 +69,17 @@ magazineShelf.printTitles();
 console.log(magazineShelf.find('Five Points'));
 console.log(getObjectProperty(magazines[0], 'publisher'));
 console.log(getObjectProperty(inventory[0], 'author'));
+
+// Task 07.04
+const bookRequiredFields: BookRequiredFields = {
+    id: 1,
+    author: 'Anton',
+    available: true,
+    category: Category.Angular,
+    markDamaged: null,
+    pages: 100,
+    title: 'Title',
+};
+const updatedBook: UpdatedBook = {};
+const params: Parameters<CreateCustomerFunctionType> = ['Anton'];
+createCustomer(...params);
