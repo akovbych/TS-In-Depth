@@ -11,7 +11,6 @@ abstract class ReferenceItem {
         // this.title = newTitle;
         // this.year = newYear;
     }
-
     printItem() {
         console.log(`title was published in year ${this.year}`);
         console.log(ReferenceItem.department);
