@@ -5,7 +5,7 @@
 import { RefBook, Shelf, UL } from './classes';
 import { Library } from './classes/library';
 import { Category } from './enums';
-import { createCustomer, getObjectProperty, purge } from './functions';
+import { createCustomer, getBooksByCategory, getBooksByCategoryPromise, getObjectProperty, logCategorySearch, logSearchResults, purge } from './functions';
 import { Book, Magazine } from './interfaces';
 import { BookRequiredFields, CreateCustomerFunctionType, UpdatedBook } from './types';
 
@@ -105,7 +105,39 @@ const inventory: Book[] = [
 // ref.printItem();
 
 // Task 08.05, 08.06
-const ul = new UL.UniversityLibrarian();
-ul.name = 'Anton';
-ul.assistCustomer('Boris', 'Learn TypeScript');
-console.log(ul);
+// const ul = new UL.UniversityLibrarian();
+// ul.name = 'Anton';
+// ul.assistCustomer('Boris', 'Learn TypeScript');
+// console.log(ul);
+
+// Task 08.07
+// const ref = new RefBook('1', 2023, 1, 1);
+// ref.copies = 10;
+// console.log(ref);
+
+// Task 09.01
+// console.log('Begin');
+// getBooksByCategory(Category.JavaScript, logCategorySearch);
+// getBooksByCategory(Category.Software, logCategorySearch);
+// console.log('End');
+
+// Task 09.02
+// console.log('Begin');
+// getBooksByCategoryPromise(Category.JavaScript)
+//     .then(titles => {
+//         console.log(titles);
+//         return Promise.resolve(titles.length + 1);
+//     })
+//     .then(len => console.log(len))
+//     .catch(reason => console.log(reason));
+// getBooksByCategoryPromise(Category.Software)
+//     .then(titles => console.log(titles))
+//     .catch(reason => console.log(reason));
+// console.log('End');
+
+// Task 09.03
+console.log('Begin');
+logSearchResults(Category.JavaScript);
+logSearchResults(Category.Software)
+    .catch(err => console.log(err));
+console.log('End');
